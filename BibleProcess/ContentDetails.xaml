@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="BibleProcess.ContentDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BibleProcess"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="White">
+            <TextBlock x:Name="chpTitle" Style="{StaticResource TitleTextBlockStyle}" Margin="12,0,0,10" Foreground="Black"/>
+        </StackPanel>
+        <WebView x:Name="webViewer" Grid.Row="1" ManipulationMode="None" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" IsDoubleTapEnabled="False" />
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar x:Name="pageCommandBar">
+            <AppBarButton x:Name="pre" Label="前一章" Icon="Previous" Click="pre_Click" />
+            <AppBarButton x:Name="next" Label="后一章" Icon="Next" Click="next_Click" />
+            <AppBarButton x:Name="complete" Label="读完了" Icon="Accept" Click="CompleteButton_Click" Visibility="Collapsed"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
