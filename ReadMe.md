@@ -19,6 +19,12 @@
 + Replaced Textbox with Combobox, user only select value, no need to input value - enhanced the user experience.
 
 + Removed toast feature, enjoy the love from God through this App by yourself.
++ 
++ Changed placeholder text to "加载中..."
++ 
++ App Install path is read-only to App, moved App setting data to App Local folder
++ 
++ Added toast notification
 
 ##Known issues
 ###N/A
