@@ -19,14 +19,17 @@
 + Replaced Textbox with Combobox, user only select value, no need to input value - enhanced the user experience.
 
 + Removed toast feature, enjoy the love from God through this App by yourself.
-+ 
+
 + Changed placeholder text to "加载中..."
-+ 
+
 + App Install path is read-only to App, moved App setting data to App Local folder
-+ 
-+ Added toast notification
+
++ Added toast notification, and user can choose enable toast or not.
 
 ##Known issues
-###N/A
+
++ when it sets to 1 chapter for 1 day, in the ContentDetails page, the 读完了 button has no way to display. - a bug need fix next version
+
++ if user goes to a chapter, and goes back to the mainpage, when he enter the ContentDetails page again, the content is initialized, and the current chapter changed to the first chapter or today. - need remember the current reading index, incase user come back and continue reading.  - fix in next version
 
 [WP8 File](http://www.cnblogs.com/icuit/archive/2012/12/09/2799348.html)
