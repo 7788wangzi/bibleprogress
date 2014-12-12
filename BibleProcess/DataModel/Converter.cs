@@ -24,8 +24,8 @@ namespace BibleProcess
             }
             if (_hasKeywordsOnPage)
             {
-                keyWordsBuilder.AppendLine("<br />");
-                keyWordsBuilder.AppendLine("<br />");
+                //keyWordsBuilder.AppendLine("<br />");
+                //keyWordsBuilder.AppendLine("<br />");
             }
 
             StringBuilder contentBuilder = new StringBuilder();
@@ -33,11 +33,11 @@ namespace BibleProcess
             foreach (var node in _verseNodes)
             {
                 string _verseID = node.Attributes.Item(0).InnerText;
-                contentBuilder.AppendLine(string.Format("<span><b>{0}</b>: {1}</span>", _verseID, node.InnerText));
-                contentBuilder.AppendLine("<br />");
-                contentBuilder.AppendLine("<br />");
+                contentBuilder.Append(string.Format("<p><sup>{0}</sup> {1}</p>", _verseID, node.InnerText));
+                //contentBuilder.AppendLine("<br />");
+                //contentBuilder.AppendLine("<br />");
             }
-            return keyWordsBuilder.ToString()+contentBuilder.ToString();
+            return keyWordsBuilder.ToString() + contentBuilder.ToString();
         }
     }
 }

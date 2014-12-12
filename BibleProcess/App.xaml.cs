@@ -30,7 +30,14 @@ namespace BibleProcess
         public static int[] CurrentTasks = new int[2];
         public static int AllPassBible = 0;
         public static BibleVersion CurrentBibleVersion = BibleVersion.Cus;
+
+        public static bool EnableToast = false;
+
+        public static int ReaadingIndex = -1;
         private TransitionCollection transitions;
+
+        // 0 is CHS, 1 is ENU
+        public static int SystemLanguage = 1;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -135,5 +142,6 @@ namespace BibleProcess
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
     }
 }

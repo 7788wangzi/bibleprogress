@@ -5,9 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -41,15 +43,44 @@ namespace BibleProcess
         {
             ContentScale = App.CurrentTasks;
             
-            if(ContentScale[0]== ContentScale[1])
-            {
-                pre.IsEnabled = false;
-                next.IsEnabled = false;
-            }
-            pre.IsEnabled = false;
+            //if(ContentScale[0]== ContentScale[1])
+            //{
+            //    pre.IsEnabled = false;
+            //    next.IsEnabled = false;
+            //}
+            //pre.IsEnabled = false;    
             currentIndex = ContentScale[0];
+
+            if(App.ReaadingIndex!=-1&&(App.ReaadingIndex >= ContentScale[0]&& App.ReaadingIndex <= ContentScale[1]))
+            {
+                currentIndex = App.ReaadingIndex;
+            }
+
+            // show buttons
+            ShowButtons();
             SetWebViewSource();
             SetPageTitle();
+        }
+
+        private void ShowButtons()
+        {
+            if (currentIndex == ContentScale[0])
+            {
+                pre.IsEnabled = false;
+            }
+            else
+                pre.IsEnabled = true;
+
+            if(currentIndex ==ContentScale[1])
+            {
+                next.IsEnabled = false;
+                complete.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                next.IsEnabled = true;
+                complete.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async void SetWebViewSource()
@@ -82,7 +113,27 @@ namespace BibleProcess
             {
                 _xmlChapter = string.Format(@"ms-appx:///DataModel/ESV/{0}.xml", currentIndex.ToString());
             }
-            
+            else if (App.CurrentBibleVersion == BibleVersion.CLZZs)
+            {
+                _xmlChapter = string.Format(@"ms-appx:///DataModel/CLZZs/{0}.xml", currentIndex.ToString());
+            }
+            else if (App.CurrentBibleVersion == BibleVersion.CNVs)
+            {
+                _xmlChapter = string.Format(@"ms-appx:///DataModel/CNVs/{0}.xml", currentIndex.ToString());
+            }
+            else if (App.CurrentBibleVersion == BibleVersion.KJV)
+            {
+                _xmlChapter = string.Format(@"ms-appx:///DataModel/KJV/{0}.xml", currentIndex.ToString());
+            }
+            else if (App.CurrentBibleVersion == BibleVersion.NIV)
+            {
+                _xmlChapter = string.Format(@"ms-appx:///DataModel/NIV/{0}.xml", currentIndex.ToString());
+            }
+            else if (App.CurrentBibleVersion == BibleVersion.WEV)
+            {
+                _xmlChapter = string.Format(@"ms-appx:///DataModel/WEV/{0}.xml", currentIndex.ToString());
+            }
+
             string content = await myData.GetChpsContent(_xmlChapter);
             html += content;
             html += "</div><body></html>";
@@ -107,10 +158,23 @@ namespace BibleProcess
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
+            if (App.SystemLanguage == 0)
+            {
+                this.next.Label = "后一章";
+                this.pre.Label = "前一章";
+                this.complete.Label = "读完了";
+            }
+            else if(App.SystemLanguage==1)
+            {
+                this.next.Label = "Next";
+                this.pre.Label = "Previous";
+                this.complete.Label = "Done";
+            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            App.ReaadingIndex = currentIndex;
             this.navigationHelper.OnNavigatedFrom(e);
         }
 
@@ -119,13 +183,14 @@ namespace BibleProcess
             if(currentIndex> ContentScale[0])
             {
                 // hide complete button
-                complete.Visibility = Visibility.Collapsed;
+                //complete.Visibility = Visibility.Collapsed;
                 currentIndex--;
-                next.IsEnabled = true;
+                //next.IsEnabled = true;
                 SetWebViewSource();
                 SetPageTitle();
-                if (currentIndex == ContentScale[0])
-                    pre.IsEnabled = false;
+                ShowButtons();
+                //if (currentIndex == ContentScale[0])
+                //    pre.IsEnabled = false;
             }
             else
             {
@@ -138,16 +203,17 @@ namespace BibleProcess
             if(currentIndex< ContentScale[1])
             {
                 currentIndex++;
-                pre.IsEnabled = true;
+                //pre.IsEnabled = true;
                 SetWebViewSource();
                 SetPageTitle();
-                if (currentIndex == ContentScale[1])
-                {
-                    next.IsEnabled = false;
+                ShowButtons();
+                //if (currentIndex == ContentScale[1])
+                //{
+                //    next.IsEnabled = false;
 
-                    // show the Reading Complete button
-                    complete.Visibility = Visibility.Visible;
-                }
+                //    // show the Reading Complete button
+                //    complete.Visibility = Visibility.Visible;
+                //}
             }
             else{
             }
@@ -158,8 +224,24 @@ namespace BibleProcess
         {
             int value = App.CurrentTasks[1]; // or data.CurrentCHP
             data myData = new data();
-            await myData.SetCurrentCHP(value);
-            App.Current.Exit();
+            bool isSaved = await myData.SetCurrentCHP(value);
+            if (isSaved)
+            {
+                // schedule a toast
+                // show a toast after 24 hours later
+                if (App.EnableToast)
+                {
+                    var toastNotifier = ToastNotificationManager.CreateToastNotifier();
+                    var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
+                    var toastText = toastXml.GetElementsByTagName("text");
+                    (toastText[0] as XmlElement).InnerText = "亲爱的，该读圣经了...";
+                    var customAlarmScheduledToast = new ScheduledToastNotification(toastXml, DateTime.Now.AddHours(23.5));
+                    customAlarmScheduledToast.Tag = "qbible";
+                    toastNotifier.AddToSchedule(customAlarmScheduledToast);
+                }
+
+                App.Current.Exit();
+            }
         }
     }
 }

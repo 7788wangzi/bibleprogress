@@ -15,12 +15,14 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="读经计划" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock Text="设置" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+            <TextBlock x:Name="title" Text="读经计划" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock x:Name="pageTitle" Text="设置" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
         
         <Grid Grid.Row="1">
-            <StackPanel Orientation="Vertical" Margin="19,9.5,19,0">
+            <ScrollViewer>
+                <ScrollViewer.Content>
+                    <StackPanel Orientation="Vertical" Margin="19,9.5,19,0">
                 <ComboBox x:Name="cbChpsPerTime" Header="每天读几章" PlaceholderText="这里选择要更改的值" SelectionChanged="cbChpsPerTime_SelectionChanged" >
                     <x:String>1章</x:String>
                     <x:String>2章</x:String>
@@ -44,8 +46,16 @@
                     <x:String>大</x:String>
                     <x:String>超大</x:String>
                 </ComboBox>
-                <TextBlock x:Name="allPass" Margin="0,12" Style="{StaticResource GroupHeaderTextBlockStyle}"/>
+                <ToggleSwitch x:Name="tsToast" Header="提醒功能" />
+                <TextBlock x:Name="allPass" Margin="0,12" Style="{StaticResource GroupHeaderTextBlockStyle}"/>                
+                <ComboBox x:Name="cbLanguage" Header="系统语言" PlaceholderText="这里选择要更改的值">
+                     <x:String>中文</x:String>
+                    <x:String>英文</x:String>
+                </ComboBox>
             </StackPanel>
+                </ScrollViewer.Content>
+            </ScrollViewer>
+            
         </Grid>
     </Grid>
     

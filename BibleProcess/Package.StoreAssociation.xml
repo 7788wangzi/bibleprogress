@@ -184,17 +184,18 @@
     <Language Code="vi-vn" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>41046QijieXue.567838BB6CBF6</MainPackageIdentityName>
+    <MainPackageIdentityName>41046QijieXue.ReadingBible</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>读经进度</ReservedName>
-      <ReservedName>读经计划表</ReservedName>
+      <ReservedName>Reading Bible</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
     <MainPackageIdentityName>41046QijieXue.QLive</MainPackageIdentityName>
     <MainPackageIdentityName>41046QijieXue.QMe</MainPackageIdentityName>
     <MainPackageIdentityName>41046QijieXue.Q</MainPackageIdentityName>
+    <MainPackageIdentityName>41046QijieXue.94536CB0505F</MainPackageIdentityName>
     <MainPackageIdentityName>41046QijieXue.490174E2EA992</MainPackageIdentityName>
+    <MainPackageIdentityName>41046QijieXue.567838BB6CBF6</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=0e4a83b3-0efc-4894-b8dd-8b870c402dd1" />
+  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=3ac8f863-aef0-409f-a257-58d61f3561cb" />
 </StoreAssociation>

@@ -4,64 +4,38 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BibleProcess"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"   
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-    <ScrollViewer IsEnabled="True" >
-        <ScrollViewer.Content>
-            <Grid>
-                <Grid.Background>
-                    <ImageBrush/>
-                </Grid.Background>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="200" />
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="0">
+            <TextBlock x:Name="title" FontFamily="Arial" FontSize="50" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Style="{StaticResource HeaderTextBlockStyle}" Margin="20,12">读经进度</TextBlock>
+            <TextBlock x:Name="current" Margin="0,50" FontFamily="Arial Narrow" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="21.333" HorizontalAlignment="Center">加载中...</TextBlock>
+        </StackPanel>
 
-                <StackPanel Orientation="Vertical" Margin="20" Grid.Row="0">
-                    <TextBlock x:Name="title" FontFamily="Arial" FontSize="50" Style="{StaticResource HeaderTextBlockStyle}">读经进度</TextBlock>
-                    <TextBlock x:Name="current" Margin="0,50" FontFamily="Arial Narrow" FontSize="21.333" HorizontalAlignment="Center">no</TextBlock>
-                </StackPanel>
-                
-                <StackPanel Orientation="Vertical" Background="White" Grid.Row="1">
-                    <TextBlock x:Name="title1" FontFamily="Arial" FontSize="50" Margin="20" Foreground="Black">今日读经</TextBlock>
-                    <Grid Margin="20,20,0,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock FontFamily="Arial Narrow" FontSize="21" Grid.Column="0" Foreground="Black">从：</TextBlock>
-                        <TextBlock x:Name="from" FontFamily="Arial Narrow" FontSize="21" Foreground="Blue"  Grid.Column="1">aaa</TextBlock>
-                    </Grid>
-                    <TextBlock FontSize="21" Foreground="Blue" HorizontalAlignment="Center">------<Span Foreground="Green">------</Span></TextBlock>
-                    <Grid Margin="20,5,0,20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock FontFamily="Arial Narrow" FontSize="21" Grid.Column="0" Foreground="Black">到：</TextBlock>
-                        <TextBlock x:Name="to" Foreground="Green" FontFamily="Arial Narrow" FontSize="21" Grid.Column="1"> bbb</TextBlock>
-                    </Grid>
+        <StackPanel Orientation="Vertical" Background="{ThemeResource ApplicationForegroundThemeBrush}" Grid.Row="1">
+            <TextBlock x:Name="title1" FontFamily="Arial" FontSize="50" Margin="20" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}">今日读经</TextBlock>
 
-                    <StackPanel>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="130"/>
-                                <RowDefinition Height="120"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="200"/>
-                            </Grid.ColumnDefinitions>
-                            <Button x:Name="cus_ViewContent" Content="和合本" Foreground="Black" FontFamily="Arial" FontSize="21" HorizontalAlignment="Right" Width="150" Height="100" Grid.Row="0" Grid.Column="0" Click="viewContent_Click" Background="Gainsboro" Margin="0,0,20,0" BorderThickness="0"/>
-                            <Button x:Name="TCVs_ViewContent" Content="现代中文译本" Foreground="Black" FontFamily="Arial" FontSize="21" HorizontalAlignment="Left" Width="150" Height="100" Grid.Row="0" Grid.Column="1" Click="viewContent_Click" Background="Gainsboro" Margin="20" FontWeight="Bold"/>
-                            <Button x:Name="ESV_ViewContent" Content="英文标准版" Foreground="Black" FontFamily="Arial" FontSize="21" HorizontalAlignment="Right" Width="150" Height="100" Grid.Row="1" Grid.Column="0" Click="viewContent_Click" Background="Gainsboro" Margin="0,0,20,0" BorderThickness="0"/>
-                        </Grid>
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
-        </ScrollViewer.Content>
-    </ScrollViewer>
+            <TextBlock x:Name="from" FontFamily="Arial Narrow" FontSize="21" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}"  HorizontalAlignment="Center">加载中...</TextBlock>
+            <TextBlock FontSize="21" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Center">------<Span Foreground="{ThemeResource PhoneAccentBrush}">------</Span></TextBlock>
+            <TextBlock x:Name="to" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" FontFamily="Arial Narrow" FontSize="21" HorizontalAlignment="Center">加载中...</TextBlock>
+            <GridView x:Name="gvBibleVersion" SelectionChanged="gvBibleVersion_SelectionChanged" Margin="20" Height="210">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{ThemeResource PhoneAccentBrush}" Width="100" Height="100" Margin="5">
+                            <TextBlock Text="{Binding Value}" FontSize="21" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" />
+                        </Border>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </StackPanel>
+    </Grid>
+
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
             <AppBarButton x:Name="Setting" Label="设置" Icon="Setting" Click="Setting_Click" />

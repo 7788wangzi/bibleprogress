@@ -15,7 +15,8 @@
         <StackPanel Grid.Row="0" Background="White">
             <TextBlock x:Name="chpTitle" Style="{StaticResource TitleTextBlockStyle}" Margin="12,0,0,10" Foreground="Black"/>
         </StackPanel>
-        <WebView x:Name="webViewer" Grid.Row="1" ManipulationMode="None" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" IsDoubleTapEnabled="False" />
+        <WebView x:Name="webViewer" Grid.Row="1" ManipulationMode="None" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" IsDoubleTapEnabled="False" >
+        </WebView>
     </Grid>
     <Page.BottomAppBar>
         <CommandBar x:Name="pageCommandBar">

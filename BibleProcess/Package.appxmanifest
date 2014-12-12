@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="41046QijieXue.567838BB6CBF6" Publisher="CN=5C3143B0-8EEE-489B-8865-B9EE03B80F90" Version="1.1.0.4" />
-  <mp:PhoneIdentity PhoneProductId="092ebd8e-c402-46b2-844a-28ed8bd4becd" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="41046QijieXue.ReadingBible" Publisher="CN=5C3143B0-8EEE-489B-8865-B9EE03B80F90" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="9f2edd9e-7751-4022-ad0a-f71ddd3ac31d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>读经进度</DisplayName>
+    <DisplayName>Reading Bible</DisplayName>
     <PublisherDisplayName>Qijie Xue</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BibleProcess.App">
-      <m3:VisualElements DisplayName="读经计划表" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="BibleProcess" ForegroundText="light" BackgroundColor="transparent">
+      <m3:VisualElements DisplayName="Reading Bible" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="BibleProcess" ForegroundText="light" BackgroundColor="transparent" ToastCapable="true">
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
@@ -24,6 +24,13 @@
           <m3:Rotation Preference="portrait" />
         </m3:InitialRotationPreference>
       </m3:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="App">
+          <BackgroundTasks>
+            <Task Type="timer" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
